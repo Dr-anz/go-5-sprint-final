@@ -7,7 +7,7 @@ import (
 
 type DataParser interface {
 	Parse(datastring string) (err error)
-	ActionInfo() (string, error)
+	PrActionInfo() (string, error)
 }
 
 func Info(dataset []string, dp DataParser) {
