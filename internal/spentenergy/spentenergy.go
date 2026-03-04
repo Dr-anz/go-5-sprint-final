@@ -23,9 +23,7 @@ func WalkingSpentCalories(steps int, weight, height float64, duration time.Durat
 	// перевод продолжительности в минуты
 	durationInMinutes := duration.Minutes()
 	// расчет количетва калорий
-	calories := (weight * meanSpeed * durationInMinutes) / mInKm
-	// применение корректирующего коэффицента
-	calories *= walkingCaloriesCoefficient
+	calories := (weight * meanSpeed * durationInMinutes) / minInH * walkingCaloriesCoefficient
 
 	return calories, nil
 }
@@ -40,9 +38,7 @@ func RunningSpentCalories(steps int, weight, height float64, duration time.Durat
 	// перевод продолжительности в минуты
 	durationInMinutes := duration.Minutes()
 	// расчет количества калорий
-	calories := (weight * meanSpeed * durationInMinutes) / mInKm
-	// применение корректирующего коэфицента
-	calories *= walkingCaloriesCoefficient * 2
+	calories := (weight * meanSpeed * durationInMinutes) / minInH
 
 	return calories, nil
 }

@@ -1,6 +1,7 @@
 package trainings
 
 import (
+	"errors"
 	"fmt"
 	"strconv"
 	"strings"
@@ -22,12 +23,15 @@ func (t *Training) Parse(datastring string) (err error) {
 	parts := strings.Split(datastring, ",")
 	// проверяем что частей ровно 3
 	if len(parts) != 3 {
-		return err
+		return errors.New("the parameters are incorrect")
 	}
 	// парсим количество шагов
 	steps, err := strconv.Atoi(parts[0])
 	if err != nil {
 		return err
+	}
+	if steps <= 0 { // проверка на ноль и отрицательные шаги
+		return errors.New("steps must be greater than zero")
 	}
 	t.Steps = steps
 
@@ -37,6 +41,9 @@ func (t *Training) Parse(datastring string) (err error) {
 	duration, err := time.ParseDuration(parts[2])
 	if err != nil {
 		return err
+	}
+	if duration <= 0 { // проверка на ноль и отрицательную длительность
+		return errors.New("duration must be greater than zero")
 	}
 	t.Duration = duration
 
